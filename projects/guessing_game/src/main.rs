@@ -35,14 +35,10 @@ fn main(){
         
         // Now, we are going to change the "guess" variables type
         // to an unsigned 32 bit integer. The ":" annotates the variables type 
-        let guess: u32 = guess
-
-            // trim off any whitespace at the beginning or end 
-            .trim()
-
-            // parse converts a string to another type 
-            .parse()
-            .expect("Please type a number"); 
+        let guess: u32 = match guess.trim().parse() { 
+            Ok(num) => num, 
+            Err(_) => continue,  
+        };
         println!("You guessed: {guess}"); 
 
         match guess.cmp(&secret_number) { 
